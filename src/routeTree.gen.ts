@@ -10,33 +10,80 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as CadastrarRouteImport } from './routes/cadastrar'
+import { Route as EntrarRouteImport } from './routes/entrar'
+import { Route as RecuperarSenhaRouteImport } from './routes/recuperar-senha'
+import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CadastrarRoute = CadastrarRouteImport.update({
+  id: '/cadastrar',
+  path: '/cadastrar',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EntrarRoute = EntrarRouteImport.update({
+  id: '/entrar',
+  path: '/entrar',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RecuperarSenhaRoute = RecuperarSenhaRouteImport.update({
+  id: '/recuperar-senha',
+  path: '/recuperar-senha',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ResetPasswordRoute = ResetPasswordRouteImport.update({
+  id: '/reset-password',
+  path: '/reset-password',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/cadastrar': typeof CadastrarRoute
+  '/entrar': typeof EntrarRoute
+  '/recuperar-senha': typeof RecuperarSenhaRoute
+  '/reset-password': typeof ResetPasswordRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/cadastrar': typeof CadastrarRoute
+  '/entrar': typeof EntrarRoute
+  '/recuperar-senha': typeof RecuperarSenhaRoute
+  '/reset-password': typeof ResetPasswordRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/cadastrar': typeof CadastrarRoute
+  '/entrar': typeof EntrarRoute
+  '/recuperar-senha': typeof RecuperarSenhaRoute
+  '/reset-password': typeof ResetPasswordRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    '/' | '/cadastrar' | '/entrar' | '/recuperar-senha' | '/reset-password'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/cadastrar' | '/entrar' | '/recuperar-senha' | '/reset-password'
+  id:
+    | '__root__'
+    | '/'
+    | '/cadastrar'
+    | '/entrar'
+    | '/recuperar-senha'
+    | '/reset-password'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CadastrarRoute: typeof CadastrarRoute
+  EntrarRoute: typeof EntrarRoute
+  RecuperarSenhaRoute: typeof RecuperarSenhaRoute
+  ResetPasswordRoute: typeof ResetPasswordRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +95,43 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/cadastrar': {
+      id: '/cadastrar'
+      path: '/cadastrar'
+      fullPath: '/cadastrar'
+      preLoaderRoute: typeof CadastrarRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/entrar': {
+      id: '/entrar'
+      path: '/entrar'
+      fullPath: '/entrar'
+      preLoaderRoute: typeof EntrarRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/recuperar-senha': {
+      id: '/recuperar-senha'
+      path: '/recuperar-senha'
+      fullPath: '/recuperar-senha'
+      preLoaderRoute: typeof RecuperarSenhaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reset-password': {
+      id: '/reset-password'
+      path: '/reset-password'
+      fullPath: '/reset-password'
+      preLoaderRoute: typeof ResetPasswordRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CadastrarRoute: CadastrarRoute,
+  EntrarRoute: EntrarRoute,
+  RecuperarSenhaRoute: RecuperarSenhaRoute,
+  ResetPasswordRoute: ResetPasswordRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
