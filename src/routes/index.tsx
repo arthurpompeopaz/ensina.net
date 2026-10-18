@@ -64,7 +64,7 @@ function Index() {
         <h2 className="text-2xl font-semibold">Em destaque</h2>
         <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {produtos?.map((p) => {
-            const t = tipos[p.tipo];
+            const t = tipos[p.tipo] ?? tipos.curso!;
             const Icon = t.icon;
             return (
               <article key={p.id} className="flex flex-col rounded-xl border bg-card p-5 transition-shadow hover:shadow-soft">

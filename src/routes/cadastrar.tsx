@@ -38,7 +38,7 @@ function Cadastrar() {
     e.preventDefault();
     const f = Object.fromEntries(new FormData(e.currentTarget));
     const parsed = schema.safeParse(f);
-    if (!parsed.success) return toast.error(parsed.error.issues[0].message);
+    if (!parsed.success) { toast.error(parsed.error.issues[0]?.message); return; }
     setLoading(true);
     const { error } = await supabase.auth.signUp({
       email: parsed.data.email,
@@ -46,7 +46,7 @@ function Cadastrar() {
       options: { emailRedirectTo: window.location.origin, data: { full_name: parsed.data.nome } },
     });
     setLoading(false);
-    if (error) return toast.error(error.message.includes("registered") ? "Este e-mail já está cadastrado." : "Não foi possível criar a conta.");
+    if (error) { toast.error(error.message.includes("registered") ? "Este e-mail já está cadastrado." : "Não foi possível criar a conta."); return; }
     setEnviado(parsed.data.email);
   }
 
