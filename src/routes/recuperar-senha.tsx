@@ -27,7 +27,7 @@ function Recuperar() {
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const parsed = z.string().trim().email().safeParse(new FormData(e.currentTarget).get("email"));
-    if (!parsed.success) return toast.error("E-mail inválido");
+    if (!parsed.success) { toast.error("E-mail inválido"); return; }
     setLoading(true);
     await supabase.auth.resetPasswordForEmail(parsed.data, {
       redirectTo: `${window.location.origin}/reset-password`,
