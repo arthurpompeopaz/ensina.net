@@ -585,6 +585,15 @@ export type Database = {
     }
     Functions: {
       become_seller: { Args: never; Returns: undefined }
+      get_product_stats: {
+        Args: never
+        Returns: {
+          nota_media: number
+          product_id: string
+          total_avaliacoes: number
+          total_vendas: number
+        }[]
+      }
       has_access: {
         Args: { _product_id: string; _user_id: string }
         Returns: boolean
