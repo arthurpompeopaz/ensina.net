@@ -13,26 +13,26 @@ export function SiteHeader() {
     navigate({ to: "/entrar", replace: true });
   }
 
+  const link = "rounded-md px-2 py-1 text-sm font-medium hover:text-primary";
+
   return (
     <header className="sticky top-0 z-40 border-b bg-background/90 backdrop-blur">
-      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4">
+      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-2 px-4">
         <Link to="/" className="flex items-center gap-2 font-display text-xl font-semibold text-primary">
           <GraduationCap className="h-6 w-6" />
-          Ensinar.me
+          <span className="hidden sm:inline">Ensinar.me</span>
         </Link>
-        <nav className="flex items-center gap-2">
+        <nav className="flex items-center gap-1 sm:gap-3">
+          <Link to="/explorar" className={link} activeProps={{ className: "text-primary" }}>Explorar</Link>
+          <Link to="/vender" className={link} activeProps={{ className: "text-primary" }}>Quero vender</Link>
           {loading ? null : user ? (
             <>
-              <span className="hidden text-sm text-muted-foreground sm:inline">{user.email}</span>
-              <Button variant="outline" size="sm" onClick={sair}>
-                Sair
-              </Button>
+              <Link to="/perfil" className={link}>Meu perfil</Link>
+              <Button variant="outline" size="sm" onClick={sair}>Sair</Button>
             </>
           ) : (
             <>
-              <Button variant="ghost" size="sm" asChild>
-                <Link to="/entrar">Entrar</Link>
-              </Button>
+              <Link to="/entrar" className={link}>Entrar</Link>
               <Button size="sm" asChild>
                 <Link to="/cadastrar">Criar conta</Link>
               </Button>
