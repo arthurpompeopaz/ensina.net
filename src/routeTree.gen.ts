@@ -10,14 +10,27 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as CadastrarRouteImport } from './routes/cadastrar'
+import { Route as ContatoRouteImport } from './routes/contato'
 import { Route as EntrarRouteImport } from './routes/entrar'
+import { Route as ExplorarRouteImport } from './routes/explorar'
+import { Route as PrivacidadeRouteImport } from './routes/privacidade'
 import { Route as RecuperarSenhaRouteImport } from './routes/recuperar-senha'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
+import { Route as TermosRouteImport } from './routes/termos'
+import { Route as VenderRouteImport } from './routes/vender'
+import { Route as AuthenticatedPerfilRouteImport } from './routes/_authenticated/perfil'
+import { Route as ProdutoIdRouteImport } from './routes/produto.$id'
+import { Route as ProfessorUsuarioRouteImport } from './routes/professor.$usuario'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CadastrarRoute = CadastrarRouteImport.update({
@@ -25,9 +38,24 @@ const CadastrarRoute = CadastrarRouteImport.update({
   path: '/cadastrar',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ContatoRoute = ContatoRouteImport.update({
+  id: '/contato',
+  path: '/contato',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const EntrarRoute = EntrarRouteImport.update({
   id: '/entrar',
   path: '/entrar',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ExplorarRoute = ExplorarRouteImport.update({
+  id: '/explorar',
+  path: '/explorar',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacidadeRoute = PrivacidadeRouteImport.update({
+  id: '/privacidade',
+  path: '/privacidade',
   getParentRoute: () => rootRouteImport,
 } as any)
 const RecuperarSenhaRoute = RecuperarSenhaRouteImport.update({
@@ -40,50 +68,142 @@ const ResetPasswordRoute = ResetPasswordRouteImport.update({
   path: '/reset-password',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TermosRoute = TermosRouteImport.update({
+  id: '/termos',
+  path: '/termos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const VenderRoute = VenderRouteImport.update({
+  id: '/vender',
+  path: '/vender',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedPerfilRoute = AuthenticatedPerfilRouteImport.update({
+  id: '/perfil',
+  path: '/perfil',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const ProdutoIdRoute = ProdutoIdRouteImport.update({
+  id: '/produto/$id',
+  path: '/produto/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProfessorUsuarioRoute = ProfessorUsuarioRouteImport.update({
+  id: '/professor/$usuario',
+  path: '/professor/$usuario',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/cadastrar': typeof CadastrarRoute
+  '/contato': typeof ContatoRoute
   '/entrar': typeof EntrarRoute
+  '/explorar': typeof ExplorarRoute
+  '/privacidade': typeof PrivacidadeRoute
   '/recuperar-senha': typeof RecuperarSenhaRoute
   '/reset-password': typeof ResetPasswordRoute
+  '/termos': typeof TermosRoute
+  '/vender': typeof VenderRoute
+  '/perfil': typeof AuthenticatedPerfilRoute
+  '/produto/$id': typeof ProdutoIdRoute
+  '/professor/$usuario': typeof ProfessorUsuarioRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/cadastrar': typeof CadastrarRoute
+  '/contato': typeof ContatoRoute
   '/entrar': typeof EntrarRoute
+  '/explorar': typeof ExplorarRoute
+  '/privacidade': typeof PrivacidadeRoute
   '/recuperar-senha': typeof RecuperarSenhaRoute
   '/reset-password': typeof ResetPasswordRoute
+  '/termos': typeof TermosRoute
+  '/vender': typeof VenderRoute
+  '/perfil': typeof AuthenticatedPerfilRoute
+  '/produto/$id': typeof ProdutoIdRoute
+  '/professor/$usuario': typeof ProfessorUsuarioRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/cadastrar': typeof CadastrarRoute
+  '/contato': typeof ContatoRoute
   '/entrar': typeof EntrarRoute
+  '/explorar': typeof ExplorarRoute
+  '/privacidade': typeof PrivacidadeRoute
   '/recuperar-senha': typeof RecuperarSenhaRoute
   '/reset-password': typeof ResetPasswordRoute
+  '/termos': typeof TermosRoute
+  '/vender': typeof VenderRoute
+  '/_authenticated/perfil': typeof AuthenticatedPerfilRoute
+  '/produto/$id': typeof ProdutoIdRoute
+  '/professor/$usuario': typeof ProfessorUsuarioRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    '/' | '/cadastrar' | '/entrar' | '/recuperar-senha' | '/reset-password'
+    | '/'
+    | '/cadastrar'
+    | '/contato'
+    | '/entrar'
+    | '/explorar'
+    | '/privacidade'
+    | '/recuperar-senha'
+    | '/reset-password'
+    | '/termos'
+    | '/vender'
+    | '/perfil'
+    | '/produto/$id'
+    | '/professor/$usuario'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/cadastrar' | '/entrar' | '/recuperar-senha' | '/reset-password'
+  to:
+    | '/'
+    | '/cadastrar'
+    | '/contato'
+    | '/entrar'
+    | '/explorar'
+    | '/privacidade'
+    | '/recuperar-senha'
+    | '/reset-password'
+    | '/termos'
+    | '/vender'
+    | '/perfil'
+    | '/produto/$id'
+    | '/professor/$usuario'
   id:
     | '__root__'
     | '/'
+    | '/_authenticated'
     | '/cadastrar'
+    | '/contato'
     | '/entrar'
+    | '/explorar'
+    | '/privacidade'
     | '/recuperar-senha'
     | '/reset-password'
+    | '/termos'
+    | '/vender'
+    | '/_authenticated/perfil'
+    | '/produto/$id'
+    | '/professor/$usuario'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   CadastrarRoute: typeof CadastrarRoute
+  ContatoRoute: typeof ContatoRoute
   EntrarRoute: typeof EntrarRoute
+  ExplorarRoute: typeof ExplorarRoute
+  PrivacidadeRoute: typeof PrivacidadeRoute
   RecuperarSenhaRoute: typeof RecuperarSenhaRoute
   ResetPasswordRoute: typeof ResetPasswordRoute
+  TermosRoute: typeof TermosRoute
+  VenderRoute: typeof VenderRoute
+  ProdutoIdRoute: typeof ProdutoIdRoute
+  ProfessorUsuarioRoute: typeof ProfessorUsuarioRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -95,6 +215,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/cadastrar': {
       id: '/cadastrar'
       path: '/cadastrar'
@@ -102,11 +229,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CadastrarRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/contato': {
+      id: '/contato'
+      path: '/contato'
+      fullPath: '/contato'
+      preLoaderRoute: typeof ContatoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/entrar': {
       id: '/entrar'
       path: '/entrar'
       fullPath: '/entrar'
       preLoaderRoute: typeof EntrarRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/explorar': {
+      id: '/explorar'
+      path: '/explorar'
+      fullPath: '/explorar'
+      preLoaderRoute: typeof ExplorarRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacidade': {
+      id: '/privacidade'
+      path: '/privacidade'
+      fullPath: '/privacidade'
+      preLoaderRoute: typeof PrivacidadeRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/recuperar-senha': {
@@ -123,15 +271,69 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ResetPasswordRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/termos': {
+      id: '/termos'
+      path: '/termos'
+      fullPath: '/termos'
+      preLoaderRoute: typeof TermosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/vender': {
+      id: '/vender'
+      path: '/vender'
+      fullPath: '/vender'
+      preLoaderRoute: typeof VenderRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/perfil': {
+      id: '/_authenticated/perfil'
+      path: '/perfil'
+      fullPath: '/perfil'
+      preLoaderRoute: typeof AuthenticatedPerfilRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/produto/$id': {
+      id: '/produto/$id'
+      path: '/produto/$id'
+      fullPath: '/produto/$id'
+      preLoaderRoute: typeof ProdutoIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/professor/$usuario': {
+      id: '/professor/$usuario'
+      path: '/professor/$usuario'
+      fullPath: '/professor/$usuario'
+      preLoaderRoute: typeof ProfessorUsuarioRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
+interface AuthenticatedRouteRouteChildren {
+  AuthenticatedPerfilRoute: typeof AuthenticatedPerfilRoute
+}
+
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedPerfilRoute: AuthenticatedPerfilRoute,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   CadastrarRoute: CadastrarRoute,
+  ContatoRoute: ContatoRoute,
   EntrarRoute: EntrarRoute,
+  ExplorarRoute: ExplorarRoute,
+  PrivacidadeRoute: PrivacidadeRoute,
   RecuperarSenhaRoute: RecuperarSenhaRoute,
   ResetPasswordRoute: ResetPasswordRoute,
+  TermosRoute: TermosRoute,
+  VenderRoute: VenderRoute,
+  ProdutoIdRoute: ProdutoIdRoute,
+  ProfessorUsuarioRoute: ProfessorUsuarioRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
