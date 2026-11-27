@@ -1,0 +1,41 @@
+<template>
+  <style>
+    @font-face { font-family: "Literata"; src: url("assets/fonts/literata-600.woff2") format("woff2"); font-weight: 600; }
+    @font-face { font-family: "Nunito Sans"; src: url("assets/fonts/nunitosans-700.woff2") format("woff2"); font-weight: 200 1000; }
+    #root {
+      position: absolute; inset: 0; overflow: hidden;
+      background: linear-gradient(135deg, oklch(0.42 0.16 262), oklch(0.55 0.15 240));
+      font-family: "Nunito Sans", sans-serif; color: #fff;
+    }
+    #f-frase { position: absolute; left: 140px; top: 360px; width: 1500px; font-family: "Literata", serif; font-weight: 600; font-size: 112px; line-height: 1.08; letter-spacing: -0.01em; }
+    #f-frase .w { display: inline-block; }
+    #f-frase .hl { color: oklch(0.85 0.13 80); }
+    #f-marca { position: absolute; left: 0; right: 0; top: 330px; display: flex; flex-direction: column; align-items: center; }
+    #f-lockup { display: flex; align-items: center; gap: 26px; }
+    #f-lockup svg { width: 150px; height: 150px; fill: none; stroke: #fff; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    #f-nome { font-family: "Literata", serif; font-weight: 600; font-size: 132px; letter-spacing: -0.01em; }
+    #f-botao { margin-top: 64px; padding: 26px 64px; border-radius: 14px; background: oklch(0.85 0.13 80); color: oklch(0.3 0.07 60); font-size: 48px; font-weight: 800; box-shadow: 0 16px 40px -14px rgba(10, 20, 70, 0.6); }
+  </style>
+  <div id="root" data-composition-id="fim" data-width="1920" data-height="1080">
+    <div id="f-frase" class="clip" data-start="0" data-duration="3.2">
+      <span class="w">Seu</span> <span class="w">conhecimento</span> <span class="w">merece</span> <span class="w hl">sair</span> <span class="w hl">da</span> <span class="w hl">gaveta.</span>
+    </div>
+    <div id="f-marca" class="clip" data-start="3.1" data-duration="2.9">
+      <div id="f-lockup">
+        <svg viewBox="0 0 24 24"><path class="f-tr" d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"/><path class="f-tr" d="M22 10v6"/><path class="f-tr" d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"/></svg>
+        <span id="f-nome">Ensinar.net</span>
+      </div>
+      <div id="f-botao">Quero vender</div>
+    </div>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+    tl.fromTo("#f-frase .w", { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.14, stagger: 0.2, ease: "power2.out" }, 0.05);
+    tl.to("#f-frase .w", { opacity: 0, filter: "blur(8px)", duration: 0.18, stagger: 0.03, ease: "power2.in" }, 2.85);
+    // a marca é desenhada, o nome entra em wipe, depois o botão
+    tl.fromTo(".f-tr", { strokeDasharray: 80, strokeDashoffset: 80 }, { strokeDashoffset: 0, duration: 0.6, stagger: 0.1, ease: "power2.inOut" }, 3.15);
+    tl.fromTo("#f-nome", { clipPath: "inset(0 100% 0 0)" }, { clipPath: "inset(0 0% 0 0)", duration: 0.5, ease: "power3.out" }, 3.45);
+    tl.fromTo("#f-botao", { scale: 0.85, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.5, ease: "expo.out" }, 3.95);
+    window.__timelines["fim"] = tl;
+  </script>
+</template>

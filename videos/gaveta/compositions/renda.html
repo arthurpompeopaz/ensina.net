@@ -1,0 +1,89 @@
+<template>
+  <style>
+    @font-face { font-family: "Literata"; src: url("assets/fonts/literata-600.woff2") format("woff2"); font-weight: 600; }
+    @font-face { font-family: "Nunito Sans"; src: url("assets/fonts/nunitosans-700.woff2") format("woff2"); font-weight: 200 1000; }
+    #root {
+      position: absolute; inset: 0; overflow: hidden; background-color: oklch(0.78 0.07 70);
+      background-image: repeating-linear-gradient(90deg, rgba(90,55,20,0.05) 0 2px, transparent 2px 140px);
+      font-family: "Nunito Sans", sans-serif; color: oklch(0.24 0.05 262);
+    }
+    #r-sombra { position: absolute; inset: 0; background: #120c05; opacity: 0.42; z-index: 1; }
+    #r-gaveta { position: absolute; left: 160px; top: 600px; width: 1600px; height: 480px; z-index: 2; }
+    #r-interior {
+      position: absolute; left: 40px; right: 40px; bottom: 380px; height: 170px; transform-origin: bottom center;
+      background: linear-gradient(180deg, oklch(0.55 0.15 240), oklch(0.42 0.16 262)); border-radius: 10px 10px 0 0;
+    }
+    #r-frente {
+      position: absolute; left: 0; right: 0; bottom: 0; height: 380px; border-radius: 14px;
+      background: linear-gradient(180deg, oklch(0.6 0.08 60), oklch(0.5 0.08 55));
+    }
+    #r-puxador { position: absolute; left: 650px; top: 150px; width: 300px; height: 44px; border-radius: 22px; background: linear-gradient(180deg, #e9e6df, #9b958a); }
+    #r-azul {
+      position: absolute; inset: 0; z-index: 3;
+      background: linear-gradient(135deg, oklch(0.42 0.16 262), oklch(0.55 0.15 240));
+    }
+    #r-titulo { position: absolute; left: 140px; top: 300px; width: 820px; z-index: 5; color: #fff; }
+    #r-titulo .pre { font-size: 48px; font-weight: 700; opacity: 0.9; }
+    #r-titulo h1 { font-family: "Literata", serif; font-weight: 600; font-size: 104px; line-height: 1.05; letter-spacing: -0.01em; margin-top: 16px; }
+    #r-titulo .w { display: inline-block; }
+    #r-titulo .hl { color: oklch(0.85 0.13 80); }
+    .r-card {
+      position: absolute; width: 560px; background: #fff; border-radius: 14px; overflow: hidden; z-index: 4;
+      border: 1px solid oklch(0.91 0.018 250); box-shadow: 0 24px 60px -18px rgba(10, 20, 70, 0.55);
+    }
+    .r-card img { display: block; width: 100%; height: 350px; object-fit: cover; }
+    .r-card .corpo { padding: 26px 30px 30px; }
+    .r-card .tipo { font-size: 28px; font-weight: 800; letter-spacing: 0.05em; text-transform: uppercase; color: oklch(0.46 0.16 260); }
+    .r-card h3 { font-size: 34px; font-weight: 700; line-height: 1.2; margin-top: 8px; }
+    .r-card .prof { font-size: 29px; color: oklch(0.5 0.03 258); margin-top: 6px; }
+    .r-card .rodape { display: flex; justify-content: space-between; align-items: center; margin-top: 22px; font-size: 30px; }
+    .r-card .nota { display: flex; align-items: center; gap: 8px; font-weight: 700; }
+    .r-card .preco { font-size: 36px; font-weight: 800; }
+    #r-c1 { left: 1200px; top: 210px; } #r-c2 { left: 1200px; top: 210px; } #r-c3 { left: 1200px; top: 210px; }
+  </style>
+  <div id="root" data-composition-id="renda" data-width="1920" data-height="1080">
+    <div id="r-sombra" class="clip" data-start="0" data-duration="3.5"></div>
+    <div id="r-gaveta" class="clip" data-start="0" data-duration="3.5">
+      <div id="r-interior"></div>
+      <div id="r-frente"><div id="r-puxador"></div></div>
+    </div>
+    <div id="r-azul" class="clip" data-start="0" data-duration="3.5"></div>
+    <div id="r-c2" class="r-card clip" data-layout-ignore data-start="0" data-duration="3.5">
+      <img src="assets/img/capa-2.jpg" alt="" />
+      <div class="corpo"><div class="tipo">E-book · Matemática</div><h3>Banco de Questões ENEM — Matemática</h3><div class="prof">Marina Albuquerque</div>
+        <div class="rodape"><span class="nota"><svg width="26" height="26" viewBox="0 0 24 24" fill="oklch(0.85 0.13 80)"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg>Novo</span><span class="preco">R$&nbsp;49,90</span></div></div>
+    </div>
+    <div id="r-c3" class="r-card clip" data-layout-ignore data-start="0" data-duration="3.5">
+      <img src="assets/img/capa-3.jpg" alt="" />
+      <div class="corpo"><div class="tipo">Curso · Língua Portuguesa</div><h3>Alfabetização com Método Fônico</h3><div class="prof">João Batista Ferreira</div>
+        <div class="rodape"><span class="nota"><svg width="26" height="26" viewBox="0 0 24 24" fill="oklch(0.85 0.13 80)"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg>Novo</span><span class="preco">R$&nbsp;249,00</span></div></div>
+    </div>
+    <div id="r-c1" class="r-card clip" data-start="0" data-duration="3.5">
+      <img src="assets/img/capa-1.jpg" alt="" />
+      <div class="corpo"><div class="tipo">Curso · Matemática</div><h3>Matemática Divertida: Jogos para o Fundamental II</h3><div class="prof">Marina Albuquerque</div>
+        <div class="rodape"><span class="nota"><svg width="26" height="26" viewBox="0 0 24 24" fill="oklch(0.85 0.13 80)"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg>Novo</span><span class="preco">R$&nbsp;197,00</span></div></div>
+    </div>
+    <div id="r-titulo" class="clip" data-start="0" data-duration="3.5">
+      <div class="pre"><span class="w">No</span> <span class="w">Ensinar.net,</span></div>
+      <h1><span class="w">o</span> <span class="w">que</span> <span class="w">você</span> <span class="w">criou</span> <span class="w">vira</span> <span class="w hl">renda.</span></h1>
+    </div>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+    // a gaveta abre e dela sai o azul do Ensinar.net
+    tl.fromTo("#r-interior", { scaleY: 0 }, { scaleY: 1, duration: 0.35, ease: "expo.out" }, 0.05);
+    tl.fromTo("#r-azul", { clipPath: "circle(0px at 960px 520px)" },
+      { clipPath: "circle(2300px at 960px 520px)", duration: 0.7, ease: "power2.inOut" }, 0.25);
+    // as folhas voltam como produtos reais, empilhados em leque
+    tl.fromTo("#r-c1", { y: 700, scale: 0.6, rotation: 0, opacity: 0 }, { y: 0, scale: 1, rotation: 0, opacity: 1, duration: 0.7, ease: "expo.out" }, 0.55);
+    tl.fromTo("#r-c2", { y: 700, scale: 0.5, rotation: 0, opacity: 0 }, { x: -190, y: 40, scale: 0.8, rotation: -7, opacity: 1, duration: 0.7, ease: "expo.out" }, 0.65);
+    tl.fromTo("#r-c3", { y: 700, scale: 0.5, rotation: 0, opacity: 0 }, { x: 190, y: 40, scale: 0.8, rotation: 7, opacity: 1, duration: 0.7, ease: "expo.out" }, 0.75);
+    tl.fromTo("#r-titulo .w", { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.14, stagger: 0.13, ease: "power2.out" }, 0.2);
+    tl.fromTo("#r-titulo .hl", { color: "#ffffff" }, { color: "oklch(0.85 0.13 80)", duration: 0.25, ease: "power2.out" }, 2.6);
+    // saída: o leque recua, o card principal segue para a próxima cena
+    tl.to("#r-titulo", { opacity: 0, filter: "blur(8px)", duration: 0.2, ease: "power2.in" }, 3.2);
+    tl.to("#r-c2, #r-c3", { opacity: 0, scale: 0.7, duration: 0.25, ease: "power3.in" }, 3.15);
+    tl.to("#r-c1", { x: -980, scale: 0.6, filter: "blur(6px)", duration: 0.32, ease: "power3.in" }, 3.18);
+    window.__timelines["renda"] = tl;
+  </script>
+</template>

@@ -1,0 +1,62 @@
+<template>
+  <style>
+    @font-face { font-family: "Literata"; src: url("assets/fonts/literata-600.woff2") format("woff2"); font-weight: 600; }
+    @font-face { font-family: "Nunito Sans"; src: url("assets/fonts/nunitosans-700.woff2") format("woff2"); font-weight: 200 1000; }
+    #root {
+      position: absolute; inset: 0; overflow: hidden;
+      background-color: oklch(0.78 0.07 70);
+      background-image: repeating-linear-gradient(90deg, rgba(90,55,20,0.05) 0 2px, transparent 2px 140px),
+        repeating-linear-gradient(90deg, rgba(255,240,210,0.06) 0 1px, transparent 1px 37px);
+      font-family: "Nunito Sans", sans-serif; color: oklch(0.24 0.05 262);
+    }
+    #h-folha {
+      position: absolute; left: 190px; top: 70px; width: 820px; height: 980px;
+      background: #fff; border-radius: 6px; padding: 72px 76px;
+      box-shadow: 0 18px 40px rgba(60, 40, 10, 0.28);
+    }
+    #h-folha .kicker { font-size: 30px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: oklch(0.46 0.16 260); }
+    #h-folha h1 { font-family: "Literata", serif; font-weight: 600; font-size: 64px; line-height: 1.1; margin-top: 14px; }
+    #h-folha .sub { font-size: 32px; font-weight: 600; color: oklch(0.5 0.03 258); margin-top: 10px; }
+    #h-folha .linha { height: 18px; border-radius: 9px; background: oklch(0.88 0.02 255); margin-top: 46px; transform-origin: left center; }
+    #h-relogio { position: absolute; left: 1160px; top: 330px; width: 640px; color: oklch(0.24 0.05 262); }
+    #h-num { font-family: "Literata", serif; font-weight: 600; font-size: 300px; line-height: 1; letter-spacing: -0.03em; }
+    #h-legenda { font-size: 44px; font-weight: 800; margin-top: 8px; }
+  </style>
+  <div id="root" data-composition-id="horas" data-width="1920" data-height="1080">
+    <div id="h-palco">
+      <div id="h-folha" class="clip" data-start="0" data-duration="4.2">
+        <div class="kicker">Plano de aula · 6º ano</div>
+        <h1>Frações com jogos</h1>
+        <div class="sub">Objetivos, materiais, avaliação</div>
+        <div class="linha" style="width: 100%"></div>
+        <div class="linha" style="width: 92%"></div>
+        <div class="linha" style="width: 97%"></div>
+        <div class="linha" style="width: 74%"></div>
+        <div class="linha" style="width: 100%"></div>
+        <div class="linha" style="width: 88%"></div>
+        <div class="linha" style="width: 95%"></div>
+        <div class="linha" style="width: 60%"></div>
+      </div>
+      <div id="h-relogio" class="clip" data-start="0" data-duration="4.2">
+        <div id="h-num">0h</div>
+        <div id="h-legenda">de preparo. Só nesta aula.</div>
+      </div>
+    </div>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+    tl.fromTo("#h-folha", { y: 30, rotation: -3 }, { y: 0, rotation: -2, duration: 0.8, ease: "expo.out" }, 0);
+    tl.fromTo("#h-folha .kicker, #h-folha h1, #h-folha .sub", { opacity: 1, filter: "blur(0px)" },
+      { opacity: 1, filter: "blur(0px)", duration: 0.01 }, 0);
+    tl.fromTo("#h-folha .linha", { scaleX: 0 }, { scaleX: 1, duration: 0.3, stagger: 0.32, ease: "power1.inOut" }, 0.8);
+    tl.fromTo("#h-relogio", { opacity: 1, x: 20 }, { opacity: 1, x: 0, duration: 0.6, ease: "expo.out" }, 0);
+    const horas = { v: 0 };
+    tl.fromTo(horas, { v: 0 }, {
+      v: 6, duration: 2.6, ease: "power1.in",
+      onUpdate: () => { document.querySelector("#h-num").textContent = Math.round(horas.v) + "h"; },
+    }, 0.6);
+    // saída: chicote para a esquerda, rumo às folhas da próxima cena
+    tl.to("#h-palco", { x: -1920, filter: "blur(14px)", duration: 0.32, ease: "power3.in" }, 3.86);
+    window.__timelines["horas"] = tl;
+  </script>
+</template>

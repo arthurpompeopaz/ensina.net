@@ -1,0 +1,56 @@
+<template>
+  <style>
+    @font-face { font-family: "Literata"; src: url("assets/fonts/literata-600.woff2") format("woff2"); font-weight: 600; }
+    @font-face { font-family: "Nunito Sans"; src: url("assets/fonts/nunitosans-700.woff2") format("woff2"); font-weight: 200 1000; }
+    #root {
+      position: absolute; inset: 0; overflow: hidden;
+      background: linear-gradient(135deg, oklch(0.42 0.16 262), oklch(0.55 0.15 240));
+      font-family: "Nunito Sans", sans-serif; color: oklch(0.24 0.05 262);
+    }
+    #v-card { position: absolute; left: 140px; top: 170px; width: 900px; background: #fff; border-radius: 22px; padding: 56px 60px; box-shadow: 0 30px 70px -24px rgba(10, 20, 70, 0.6); }
+    #v-card h3 { font-size: 48px; font-weight: 800; color: oklch(0.46 0.16 260); }
+    .v-passo { display: flex; gap: 28px; align-items: center; margin-top: 44px; }
+    .v-ico { width: 88px; height: 88px; flex: none; border-radius: 50%; background: oklch(0.46 0.16 260); display: flex; align-items: center; justify-content: center; }
+    .v-ico svg { width: 42px; height: 42px; stroke: #fff; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .v-t { font-size: 42px; font-weight: 800; }
+    .v-d { font-size: 32px; color: oklch(0.5 0.03 258); margin-top: 2px; }
+    .v-tag { display: inline-block; margin-left: 14px; padding: 4px 16px; border-radius: 8px; font-size: 28px; font-weight: 800; background: oklch(0.85 0.13 80); color: oklch(0.3 0.07 60); vertical-align: 6px; }
+    #v-frase { position: absolute; left: 1130px; top: 360px; width: 680px; color: #fff; font-family: "Literata", serif; font-weight: 600; font-size: 84px; line-height: 1.1; }
+    #v-frase .w { display: inline-block; }
+  </style>
+  <div id="root" data-composition-id="venda" data-width="1920" data-height="1080">
+    <div id="v-card" class="clip" data-start="0" data-duration="4.4">
+      <h3>Para quem vende</h3>
+      <div class="v-passo" id="v-p1">
+        <span class="v-ico"><svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6"/><path d="M22 11h-6"/></svg></span>
+        <span><span class="v-t">1. Crie seu perfil</span><span class="v-d" style="display:block">Mostre sua formação e experiência.</span></span>
+      </div>
+      <div class="v-passo" id="v-p2">
+        <span class="v-ico"><svg viewBox="0 0 24 24"><path d="M12 3v12"/><path d="m17 8-5-5-5 5"/><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/></svg></span>
+        <span><span class="v-t">2. Publique</span><span class="v-tag" id="v-gratis">Publicar é grátis</span><span class="v-d" style="display:block">Envie cursos, e-books, pesquisas ou mentorias.</span></span>
+      </div>
+      <div class="v-passo" id="v-p3">
+        <span class="v-ico"><svg viewBox="0 0 24 24"><path d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1"/><path d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4"/></svg></span>
+        <span><span class="v-t">3. Receba</span><span class="v-d" style="display:block">Ganhe 90% de cada venda.</span></span>
+      </div>
+    </div>
+    <div id="v-frase" class="clip" data-start="0" data-duration="4.4">
+      <span class="w">Para</span> <span class="w">professores</span> <span class="w">e</span> <span class="w">alunos</span> <span class="w">do</span> <span class="w">Brasil</span> <span class="w">inteiro.</span>
+    </div>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+    // o card chega carregado da cena anterior
+    tl.fromTo("#v-card", { x: 260, scale: 0.7, opacity: 0, filter: "blur(6px)" }, { x: 0, scale: 1, opacity: 1, filter: "blur(0px)", duration: 0.55, ease: "expo.out" }, 0);
+    tl.fromTo("#v-p1, #v-p2, #v-p3", { opacity: 0.28 }, { opacity: 0.28, duration: 0.01 }, 0);
+    tl.to("#v-p1", { opacity: 1, duration: 0.2 }, 0.15);
+    tl.to("#v-p2", { opacity: 1, duration: 0.25, ease: "power2.out" }, 0.3);
+    tl.fromTo("#v-gratis", { scale: 0.6, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.45, ease: "back.out(1.6)" }, 0.55);
+    tl.to("#v-p3", { opacity: 1, duration: 0.25, ease: "power2.out" }, 1.05);
+    tl.fromTo("#v-frase .w", { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.14, stagger: 0.17, ease: "power2.out" }, 1.55);
+    // saída: o passo 3 (Receba) leva para o dinheiro
+    tl.to("#v-frase", { opacity: 0, filter: "blur(8px)", duration: 0.2, ease: "power2.in" }, 4.05);
+    tl.to("#v-card", { y: -80, opacity: 0, filter: "blur(8px)", duration: 0.28, ease: "power3.in" }, 4.08);
+    window.__timelines["venda"] = tl;
+  </script>
+</template>

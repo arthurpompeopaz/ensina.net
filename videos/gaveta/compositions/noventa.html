@@ -1,0 +1,52 @@
+<template>
+  <style>
+    @font-face { font-family: "Literata"; src: url("assets/fonts/literata-600.woff2") format("woff2"); font-weight: 600; }
+    @font-face { font-family: "Nunito Sans"; src: url("assets/fonts/nunitosans-700.woff2") format("woff2"); font-weight: 200 1000; }
+    #root {
+      position: absolute; inset: 0; overflow: hidden;
+      background: linear-gradient(135deg, oklch(0.42 0.16 262), oklch(0.55 0.15 240));
+      font-family: "Nunito Sans", sans-serif; color: #fff;
+    }
+    #n-produto { position: absolute; left: 140px; top: 150px; display: flex; gap: 34px; align-items: center; background: #fff; color: oklch(0.24 0.05 262); border-radius: 18px; padding: 24px 40px 24px 24px; box-shadow: 0 24px 60px -20px rgba(10,20,70,0.6); }
+    #n-produto img { width: 240px; height: 150px; object-fit: cover; border-radius: 10px; }
+    #n-produto .tit { font-size: 34px; font-weight: 800; max-width: 620px; line-height: 1.2; }
+    #n-produto .preco { font-size: 64px; font-weight: 800; margin-left: 30px; white-space: nowrap; }
+    #n-barra { position: absolute; left: 140px; top: 520px; width: 1640px; height: 110px; border-radius: 16px; background: rgba(255,255,255,0.16); overflow: hidden; }
+    #n-voce { position: absolute; left: 0; top: 0; bottom: 0; width: 90%; background: oklch(0.85 0.13 80); color: oklch(0.3 0.07 60); display: flex; align-items: center; padding-left: 36px; font-size: 44px; font-weight: 800; transform-origin: left center; }
+    #n-taxa { position: absolute; right: 0; top: 0; bottom: 0; width: 10%; display: flex; align-items: center; justify-content: center; font-size: 34px; font-weight: 800; }
+    #n-total { position: absolute; left: 140px; top: 700px; }
+    #n-valor { font-family: "Literata", serif; font-weight: 600; font-size: 190px; line-height: 1; letter-spacing: -0.02em; }
+    #n-leg { font-size: 48px; font-weight: 800; margin-top: 6px; }
+    #n-leg .hl { color: oklch(0.85 0.13 80); }
+  </style>
+  <div id="root" data-composition-id="noventa" data-width="1920" data-height="1080">
+    <div id="n-produto" class="clip" data-start="0" data-duration="3.5">
+      <img src="assets/img/capa-1.jpg" alt="" />
+      <div class="tit">Matemática Divertida: Jogos para o Fundamental II</div>
+      <div class="preco">R$ 197,00</div>
+    </div>
+    <div id="n-barra" class="clip" data-start="0" data-duration="3.5">
+      <div id="n-voce">90% para você</div>
+      <div id="n-taxa">10%</div>
+    </div>
+    <div id="n-total" class="clip" data-start="0" data-duration="3.5">
+      <div id="n-valor">R$ 0,00</div>
+      <div id="n-leg">de cada venda de R$ 197,00 <span class="hl">ficam com você.</span></div>
+    </div>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+    tl.fromTo("#n-produto", { y: -60, opacity: 0, filter: "blur(6px)" }, { y: 0, opacity: 1, filter: "blur(0px)", duration: 0.5, ease: "expo.out" }, 0);
+    tl.fromTo("#n-barra", { opacity: 0 }, { opacity: 1, duration: 0.2 }, 0.25);
+    tl.fromTo("#n-voce", { scaleX: 0 }, { scaleX: 1, duration: 0.8, ease: "power2.inOut" }, 0.4);
+    tl.fromTo("#n-total", { opacity: 0 }, { opacity: 1, duration: 0.2 }, 0.5);
+    const v = { x: 0 };
+    tl.fromTo(v, { x: 0 }, {
+      x: 177.3, duration: 0.8, ease: "power2.inOut",
+      onUpdate: () => { document.querySelector("#n-valor").textContent = "R$ " + v.x.toFixed(2).replace(".", ","); },
+    }, 0.4);
+    // saída: tudo sobe e o fundo fica para a cena final
+    tl.to("#n-produto, #n-barra, #n-total", { y: -60, opacity: 0, filter: "blur(8px)", duration: 0.26, stagger: 0.04, ease: "power3.in" }, 3.15);
+    window.__timelines["noventa"] = tl;
+  </script>
+</template>
