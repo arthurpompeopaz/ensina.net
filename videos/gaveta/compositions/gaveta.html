@@ -1,0 +1,67 @@
+<template>
+  <style>
+    @font-face { font-family: "Literata"; src: url("assets/fonts/literata-600.woff2") format("woff2"); font-weight: 600; }
+    @font-face { font-family: "Nunito Sans"; src: url("assets/fonts/nunitosans-700.woff2") format("woff2"); font-weight: 200 1000; }
+    #root {
+      position: absolute; inset: 0; overflow: hidden;
+      background-color: oklch(0.78 0.07 70);
+      background-image: repeating-linear-gradient(90deg, rgba(90,55,20,0.05) 0 2px, transparent 2px 140px),
+        repeating-linear-gradient(90deg, rgba(255,240,210,0.06) 0 1px, transparent 1px 37px);
+      font-family: "Nunito Sans", sans-serif; color: oklch(0.24 0.05 262);
+    }
+    .g-folha {
+      position: absolute; top: 110px; width: 500px; height: 640px; background: #fff; border-radius: 6px;
+      padding: 50px 48px; box-shadow: 0 18px 40px rgba(60, 40, 10, 0.28); z-index: 2;
+    }
+    .g-folha h2 { font-family: "Literata", serif; font-weight: 600; font-size: 54px; line-height: 1.1; }
+    .g-folha .linha { height: 16px; border-radius: 8px; background: oklch(0.88 0.02 255); margin-top: 38px; }
+    #g-f1 { left: 200px; } #g-f2 { left: 710px; } #g-f3 { left: 1220px; }
+    /* gaveta vista de frente e de cima: interior escuro + frente de madeira */
+    .g-camada { position: absolute; left: 160px; top: 600px; width: 1600px; height: 480px; }
+    #g-camada-fundo { z-index: 1; } #g-camada-frente { z-index: 3; }
+    #g-interior {
+      position: absolute; left: 40px; right: 40px; bottom: 380px; height: 170px; z-index: 1;
+      background: linear-gradient(180deg, #2b1b0c, #4a3018); border-radius: 10px 10px 0 0;
+      transform-origin: bottom center;
+    }
+    #g-frente {
+      position: absolute; left: 0; right: 0; bottom: 0; height: 380px; z-index: 3;
+      background: linear-gradient(180deg, oklch(0.6 0.08 60), oklch(0.5 0.08 55));
+      border-radius: 14px; box-shadow: 0 -4px 0 rgba(255,230,190,0.35) inset, 0 24px 50px rgba(40,20,5,0.35);
+    }
+    #g-puxador {
+      position: absolute; left: 650px; top: 150px; width: 300px; height: 44px; border-radius: 22px;
+      background: linear-gradient(180deg, #e9e6df, #9b958a); box-shadow: 0 6px 10px rgba(0,0,0,0.3);
+    }
+    #g-sombra { position: absolute; inset: 0; background: #120c05; z-index: 5; pointer-events: none; opacity: 0; }
+  </style>
+  <div id="root" data-composition-id="gaveta" data-width="1920" data-height="1080">
+    <div id="g-camada-fundo" class="g-camada clip" data-start="0" data-duration="5.4"><div id="g-interior"></div></div>
+    <div id="g-camada-frente" class="g-camada clip" data-start="0" data-duration="5.4"><div id="g-frente"><div id="g-puxador"></div></div></div>
+    <div id="g-f1" class="g-folha clip" data-start="0" data-duration="5.4">
+      <h2>Plano de aula</h2><div class="linha"></div><div class="linha" style="width:80%"></div><div class="linha"></div><div class="linha" style="width:66%"></div>
+    </div>
+    <div id="g-f2" class="g-folha clip" data-start="0" data-duration="5.4">
+      <h2>Apostila</h2><div class="linha"></div><div class="linha" style="width:90%"></div><div class="linha"></div><div class="linha" style="width:72%"></div>
+    </div>
+    <div id="g-f3" class="g-folha clip" data-start="0" data-duration="5.4">
+      <h2>Exercícios</h2><div class="linha"></div><div class="linha" style="width:85%"></div><div class="linha"></div><div class="linha" style="width:60%"></div>
+    </div>
+    <div id="g-sombra" class="clip" data-start="0" data-duration="5.4"></div>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+    // as folhas chegam nas palavras: Planos de aula / apostilas / exercícios
+    [["#g-f1", 0.05, -3], ["#g-f2", 0.95, 2], ["#g-f3", 1.6, -1.5]].forEach(([sel, t, r]) => {
+      tl.fromTo(sel, { x: 700, rotation: r + 8, opacity: 0, filter: "blur(10px)" },
+        { x: 0, rotation: r, opacity: 1, filter: "blur(0px)", duration: 0.55, ease: "expo.out" }, t);
+    });
+    // a gaveta sobe; as folhas caem dentro dela (atrás da frente)
+    tl.fromTo(".g-camada", { y: 520 }, { y: 0, duration: 0.6, ease: "expo.out" }, 2.4);
+    tl.to(".g-folha", { y: 620, scale: 0.86, duration: 0.45, stagger: 0.09, ease: "power2.in" }, 2.95);
+    // fecha: o interior some atrás da frente
+    tl.to("#g-interior", { scaleY: 0, duration: 0.35, ease: "power3.in" }, 3.65);
+    tl.fromTo("#g-sombra", { opacity: 0 }, { opacity: 0.42, duration: 0.5, ease: "power2.inOut" }, 3.85);
+    window.__timelines["gaveta"] = tl;
+  </script>
+</template>
